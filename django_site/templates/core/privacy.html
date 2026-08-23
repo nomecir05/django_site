@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+{% block content %}
+{% include "partials/page_hero.html" with eyebrow="PRIVACY" heading="Your information stays purposeful." intro="This starter policy explains how project and contact information is handled. Replace the example company details and have the final policy reviewed before public launch." %}
+<section class="section"><div class="container legal-copy">
+    <p class="legal-updated">Example policy · Last updated August 21, 2026</p>
+    <h2>Information we collect</h2><p>We collect information you submit through quotation, tracking, contact, and newsletter forms, including your name, contact details, project location, budget range, timeline, and project description.</p>
+    <h2>How we use it</h2><p>We use submitted information to assess inquiries, communicate about potential or active work, prepare estimates and proposals, manage the quotation workflow, maintain business records, and improve our services.</p>
+    <h2>Sharing and retention</h2><p>We do not sell personal information. Information may be shared with authorized team members and professional partners when needed to evaluate or deliver a project. Records are retained only as long as required for business, contractual, or legal purposes.</p>
+    <h2>Your choices</h2><p>You may request correction or deletion of eligible personal information and may unsubscribe from marketing updates at any time. Project and transaction records may be retained when required by law or legitimate business obligations.</p>
+    <h2>Contact</h2><p>For privacy questions, email <a href="mailto:{{ company.email }}">{{ company.email }}</a>.</p>
+</div></section>
+{% endblock %}

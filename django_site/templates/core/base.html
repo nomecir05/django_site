@@ -1,0 +1,128 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1b2b">
+    <meta name="description" content="BuildCore Construction provides residential, commercial, renovation, and project management services in Laguna and nearby areas.">
+    <title>{% if page_title %}{{ page_title }} | {% endif %}BuildCore Construction</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <script src="{% static 'core/js/main.js' %}" defer></script>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <div class="topbar">
+        <div class="container topbar-inner">
+            <p>PCAB-ready processes · Safety-led sites · Transparent progress</p>
+            <div class="topbar-links">
+                <a href="tel:+639175550142">{{ company.phone }}</a>
+                <span aria-hidden="true">•</span>
+                <a href="mailto:{{ company.email }}">{{ company.email }}</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="site-header" data-header>
+        <div class="container nav-wrap">
+            <a class="brand" href="{% url 'core:home' %}" aria-label="BuildCore Construction home">
+                <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span class="brand-copy"><strong>BUILDCORE</strong><small>CONSTRUCTION</small></span>
+            </a>
+
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle>
+                <span class="sr-only">Open navigation</span>
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation" data-menu>
+                <a {% if request.resolver_match.url_name == 'home' %}class="active"{% endif %} href="{% url 'core:home' %}">Home</a>
+                <a {% if request.resolver_match.url_name == 'about' %}class="active"{% endif %} href="{% url 'core:about' %}">About</a>
+                <a {% if request.resolver_match.url_name == 'services' %}class="active"{% endif %} href="{% url 'core:services' %}">Services</a>
+                <a {% if request.resolver_match.url_name == 'projects' or request.resolver_match.url_name == 'project_detail' %}class="active"{% endif %} href="{% url 'core:projects' %}">Projects</a>
+                <a {% if request.resolver_match.url_name == 'track_quote' %}class="active"{% endif %} href="{% url 'core:track_quote' %}">Track request</a>
+                <a {% if request.resolver_match.url_name == 'contact' %}class="active"{% endif %} href="{% url 'core:contact' %}">Contact</a>
+                <a class="btn btn-primary nav-cta" href="{% url 'core:quote_request' %}">Get a free quote <span aria-hidden="true">↗</span></a>
+            </nav>
+        </div>
+    </header>
+
+    {% if messages %}
+    <div class="flash-stack container" aria-live="polite">
+        {% for message in messages %}
+        <div class="flash flash-{{ message.tags }}">
+            <span>{{ message }}</span>
+            <button type="button" aria-label="Dismiss message" data-dismiss>×</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <section class="footer-cta">
+        <div class="container footer-cta-grid">
+            <div>
+                <span class="eyebrow eyebrow-light">LET'S BUILD WITH CLARITY</span>
+                <h2>Planning a construction project?</h2>
+                <p>Share the basics today. Our estimating team will review your request and contact you within one business day.</p>
+            </div>
+            <a class="btn btn-light btn-lg" href="{% url 'core:quote_request' %}">Start your project <span aria-hidden="true">↗</span></a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand-column">
+                <a class="brand brand-light" href="{% url 'core:home' %}">
+                    <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+                    <span class="brand-copy"><strong>BUILDCORE</strong><small>CONSTRUCTION</small></span>
+                </a>
+                <p>Practical design, disciplined construction, and honest project communication—from first conversation to final turnover.</p>
+                <div class="license-chip">Built responsibly in the Philippines</div>
+            </div>
+            <div>
+                <h3>Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="{% url 'core:about' %}">About us</a></li>
+                    <li><a href="{% url 'core:services' %}">Our services</a></li>
+                    <li><a href="{% url 'core:projects' %}">Selected projects</a></li>
+                    <li><a href="{% url 'core:track_quote' %}">Track a request</a></li>
+                    <li><a href="{% url 'core:privacy' %}">Privacy policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <ul class="footer-contact">
+                    <li><span>Office</span>{{ company.address }}</li>
+                    <li><span>Phone</span><a href="tel:+639175550142">{{ company.phone }}</a></li>
+                    <li><span>Email</span><a href="mailto:{{ company.email }}">{{ company.email }}</a></li>
+                    <li><span>Hours</span>{{ company.hours }}</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Project notes</h3>
+                <p>Occasional construction tips, material guides, and BuildCore updates.</p>
+                <form class="newsletter-form" method="post" action="{% url 'core:newsletter_subscribe' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    {{ newsletter_form.email }}
+                    <button type="submit" aria-label="Subscribe">→</button>
+                </form>
+                <small>No spam. Unsubscribe anytime.</small>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>© {% now "Y" %} BuildCore Construction. All rights reserved.</p>
+            <p>Designed for trust. Engineered for action.</p>
+        </div>
+    </footer>
+
+    <a class="floating-quote" href="{% url 'core:quote_request' %}" aria-label="Request a quotation">
+        <span>Request a quote</span><strong>↗</strong>
+    </a>
+</body>
+</html>

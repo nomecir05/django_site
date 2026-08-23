@@ -1,0 +1,57 @@
+{% extends "core/base.html" %}
+{% block content %}
+<section class="form-page">
+    <div class="form-page-aside">
+        <div class="form-page-aside-overlay"></div>
+        <div class="form-aside-content">
+            <a class="back-link" href="{% url 'core:home' %}">← Back to home</a>
+            <span class="eyebrow eyebrow-light">START A CONVERSATION</span>
+            <h1>Tell us what you want to build.</h1>
+            <p>Share what you know today. Early estimates are based on the information available and become more detailed as scope and drawings are confirmed.</p>
+            <ul>
+                <li><span>1</span><div><strong>Submit the basics</strong><small>About 3 minutes</small></div></li>
+                <li><span>2</span><div><strong>Estimator review</strong><small>Within 1 business day</small></div></li>
+                <li><span>3</span><div><strong>Discovery call or site visit</strong><small>Scheduled with you</small></div></li>
+            </ul>
+            <div class="privacy-note">🔒 Your project details are kept private and used only to assess your request.</div>
+        </div>
+    </div>
+    <div class="form-page-main">
+        <div class="form-shell">
+            <div class="form-heading">
+                <span class="eyebrow">FREE INITIAL ESTIMATE</span>
+                <h2>Project request</h2>
+                <p>Fields marked * are required.</p>
+            </div>
+            {% if form.non_field_errors %}<div class="form-alert">{{ form.non_field_errors }}</div>{% endif %}
+            <form method="post" class="quote-form" novalidate data-quote-form>
+                {% csrf_token %}
+                <fieldset>
+                    <legend><span>01</span> Contact information</legend>
+                    <div class="form-grid">
+                        <div class="field-group">{{ form.full_name.label_tag }}{{ form.full_name }}{% for error in form.full_name.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>
+                        <div class="field-group">{{ form.company_name.label_tag }}{{ form.company_name }}{% for error in form.company_name.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>
+                        <div class="field-group">{{ form.email.label_tag }}{{ form.email }}{% for error in form.email.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>
+                        <div class="field-group">{{ form.phone.label_tag }}{{ form.phone }}{% for error in form.phone.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend><span>02</span> Project information</legend>
+                    <div class="form-grid">
+                        <div class="field-group">{{ form.project_type.label_tag }}{{ form.project_type }}{% for error in form.project_type.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>
+                        <div class="field-group">{{ form.location.label_tag }}{{ form.location }}{% for error in form.location.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>
+                        <div class="field-group">{{ form.budget.label_tag }}{{ form.budget }}{% for error in form.budget.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>
+                        <div class="field-group">{{ form.timeline.label_tag }}{{ form.timeline }}{% for error in form.timeline.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>
+                        <div class="field-group">{{ form.preferred_contact.label_tag }}{{ form.preferred_contact }}{% for error in form.preferred_contact.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>
+                        <div></div>
+                        <div class="field-group field-full">{{ form.details.label_tag }}{{ form.details }}<div class="field-helper"><span>Include approximate size, rooms or spaces, existing drawings, and special requirements.</span><span data-char-count>0 characters</span></div>{% for error in form.details.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>
+                    </div>
+                </fieldset>
+                <div class="consent-row">{{ form.consent }}<label for="{{ form.consent.id_for_label }}">{{ form.consent.label }}</label>{% for error in form.consent.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Send project request <span>↗</span></button>
+                <p class="submit-note">No obligation. No payment required.</p>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

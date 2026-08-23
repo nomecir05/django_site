@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+{% block content %}
+{% include "partials/page_hero.html" with eyebrow="OUR PROJECTS" heading="Work that earns its place." intro="A selection of homes, workplaces, commercial environments, and industrial facilities delivered with attention to use—not only appearance." %}
+
+<section class="section">
+    <div class="container filter-bar" aria-label="Filter projects">
+        <a {% if not selected_category %}class="active"{% endif %} href="{% url 'core:projects' %}">All projects</a>
+        {% for value, label in categories %}
+        <a {% if selected_category == value %}class="active"{% endif %} href="{% url 'core:projects' %}?category={{ value }}">{{ label }}</a>
+        {% endfor %}
+    </div>
+    <div class="container project-grid project-grid-wide">
+        {% for project in projects %}
+            {% include "partials/project_card.html" with project=project %}
+        {% empty %}
+            <div class="empty-state">No published projects match this category.</div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

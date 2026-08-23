@@ -1,0 +1,14 @@
+<article class="project-card reveal">
+    <a class="project-image" href="{{ project.get_absolute_url }}" aria-label="View {{ project.title }}">
+        <img src="{{ project.image_url }}" alt="{{ project.title }}" loading="lazy">
+        <span class="project-arrow" aria-hidden="true">↗</span>
+    </a>
+    <div class="project-card-body">
+        <div class="project-meta">
+            <span>{{ project.get_category_display }}</span>
+            <span>{{ project.location }}</span>
+        </div>
+        <h3><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
+        <p>{{ project.summary }}</p>
+    </div>
+</article>

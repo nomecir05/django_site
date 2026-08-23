@@ -1,0 +1,51 @@
+{% extends "core/base.html" %}
+{% block content %}
+{% include "partials/page_hero.html" with eyebrow="ABOUT BUILDCORE" heading="Built on practical experience." intro="We are a Laguna-based construction team that believes good work starts with clear information, realistic planning, and respect for every person on the project." %}
+
+<section class="section">
+    <div class="container story-grid">
+        <div class="story-copy reveal">
+            <span class="eyebrow">OUR STORY</span>
+            <h2>Construction should feel <span>well managed.</span></h2>
+            <p class="lead-copy">BuildCore began with a simple conviction: clients deserve the same care in communication that they expect in construction.</p>
+            <p>Since 2014, our team has supported homeowners, growing businesses, and property operators across Laguna and nearby provinces. We combine disciplined site management with a grounded understanding of local conditions, suppliers, approval processes, and construction realities.</p>
+            <p>We are not interested in impressive promises that disappear after mobilization. Our work is built around written scope, realistic sequencing, visible inspections, and early conversations when conditions change.</p>
+        </div>
+        <div class="story-visual reveal">
+            <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1300&q=88" alt="BuildCore team discussing a construction plan" loading="lazy">
+            <div class="story-note"><strong>12+</strong><span>years building long-term client relationships</span></div>
+        </div>
+    </div>
+</section>
+
+<section class="section soft-section">
+    <div class="container">
+        <div class="center-heading reveal">
+            <span class="eyebrow">WHAT GUIDES US</span>
+            <h2>Values visible on the jobsite.</h2>
+        </div>
+        <div class="value-grid">
+            <article class="value-card reveal"><span>01</span><h3>Own the outcome</h3><p>We take responsibility, raise issues early, and stay involved until agreed work is complete.</p></article>
+            <article class="value-card reveal"><span>02</span><h3>Build transparently</h3><p>Scope, cost, progress, changes, and concerns are documented in language clients can follow.</p></article>
+            <article class="value-card reveal"><span>03</span><h3>Respect the craft</h3><p>We plan the work, protect finished areas, inspect critical stages, and value skilled trades.</p></article>
+            <article class="value-card reveal"><span>04</span><h3>Protect people</h3><p>Safe access, housekeeping, PPE, coordination, and daily awareness are part of production.</p></article>
+        </div>
+    </div>
+</section>
+
+<section class="section dark-section">
+    <div class="container commitment-grid">
+        <div class="reveal">
+            <span class="eyebrow eyebrow-light">OUR COMMITMENT</span>
+            <h2>We protect the five things every project depends on.</h2>
+        </div>
+        <div class="commitment-list reveal">
+            <div><span>01</span><strong>Scope</strong><p>Everyone understands what is—and is not—included.</p></div>
+            <div><span>02</span><strong>Cost</strong><p>Decisions and variations are evaluated before execution.</p></div>
+            <div><span>03</span><strong>Time</strong><p>Dependencies and milestones are tracked, not guessed.</p></div>
+            <div><span>04</span><strong>Quality</strong><p>Critical work is inspected before the next layer begins.</p></div>
+            <div><span>05</span><strong>Safety</strong><p>Planning protects workers, visitors, property, and operations.</p></div>
+        </div>
+    </div>
+</section>
+{% endblock %}

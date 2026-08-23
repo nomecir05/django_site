@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+{% block content %}
+<section class="result-page">
+    <div class="container result-card">
+        <div class="success-icon" aria-hidden="true">✓</div>
+        <span class="eyebrow">REQUEST RECEIVED</span>
+        <h1>Thanks, {{ quote.full_name }}.</h1>
+        <p>Your project is now in our estimating workflow. Keep the reference below—you will need it together with your email to track the request.</p>
+        <div class="reference-box"><span>Your reference</span><strong id="quote-reference">{{ quote.reference }}</strong><button type="button" data-copy-reference data-value="{{ quote.reference }}">Copy</button></div>
+        <div class="next-steps">
+            <div><span>01</span><strong>Details review</strong><p>Our estimator checks the scope, location, budget, and timeline.</p></div>
+            <div><span>02</span><strong>We contact you</strong><p>Expect an email, call, or SMS within one business day.</p></div>
+            <div><span>03</span><strong>Discovery</strong><p>We may arrange a call or site visit before preparing a proposal.</p></div>
+        </div>
+        <div class="result-actions"><a class="btn btn-primary" href="{% url 'core:track_quote' %}">Track this request</a><a class="btn btn-outline" href="{% url 'core:projects' %}">View our projects</a></div>
+    </div>
+</section>
+{% endblock %}

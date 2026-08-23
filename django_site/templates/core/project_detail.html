@@ -1,0 +1,42 @@
+{% extends "core/base.html" %}
+{% load humanize %}
+{% block content %}
+<article class="project-detail">
+    <header class="project-detail-header">
+        <div class="container">
+            <a class="back-link" href="{% url 'core:projects' %}">← Back to projects</a>
+            <div class="project-title-row">
+                <div>
+                    <span class="eyebrow eyebrow-light">{{ project.get_category_display }} · {{ project.location }}</span>
+                    <h1>{{ project.title }}</h1>
+                </div>
+                <p>{{ project.summary }}</p>
+            </div>
+        </div>
+    </header>
+    <div class="project-detail-image">
+        <img src="{{ project.image_url }}" alt="{{ project.title }}">
+    </div>
+    <div class="container project-facts">
+        <div><span>Location</span><strong>{{ project.location }}</strong></div>
+        {% if project.area_sqm %}<div><span>Floor area</span><strong>{{ project.area_sqm|intcomma }} sqm</strong></div>{% endif %}
+        {% if project.duration_months %}<div><span>Duration</span><strong>{{ project.duration_months }} months</strong></div>{% endif %}
+        {% if project.completion_date %}<div><span>Completed</span><strong>{{ project.completion_date|date:"F Y" }}</strong></div>{% endif %}
+    </div>
+    <section class="section">
+        <div class="container project-story">
+            <div><span class="eyebrow">PROJECT OVERVIEW</span><h2>Built around the way the space would be used.</h2></div>
+            <div><p class="lead-copy">{{ project.summary }}</p><p>{{ project.description }}</p><a class="btn btn-primary" href="{% url 'core:quote_request' %}">Plan a similar project <span>↗</span></a></div>
+        </div>
+    </section>
+</article>
+
+{% if related_projects %}
+<section class="section soft-section">
+    <div class="container section-heading-row"><div><span class="eyebrow">KEEP EXPLORING</span><h2>Related projects</h2></div></div>
+    <div class="container project-grid">
+        {% for project in related_projects %}{% include "partials/project_card.html" with project=project %}{% endfor %}
+    </div>
+</section>
+{% endif %}
+{% endblock %}

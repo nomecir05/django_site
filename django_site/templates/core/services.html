@@ -1,0 +1,43 @@
+{% extends "core/base.html" %}
+{% block content %}
+{% include "partials/page_hero.html" with eyebrow="OUR SERVICES" heading="The right team for every stage." intro="From early planning to repairs after turnover, BuildCore provides coordinated construction services with clear ownership and practical controls." %}
+
+<section class="section">
+    <div class="container service-detail-list">
+        {% for service in services %}
+        <article class="service-detail reveal" id="{{ service.slug }}">
+            <div class="service-detail-image">
+                {% if service.image_url %}<img src="{{ service.image_url }}" alt="{{ service.title }}" loading="lazy">{% endif %}
+                <span>{{ service.icon }}</span>
+            </div>
+            <div class="service-detail-copy">
+                <span class="eyebrow">SERVICE {{ service.icon }}</span>
+                <h2>{{ service.title }}</h2>
+                <p class="lead-copy">{{ service.short_description }}</p>
+                <p>{{ service.description }}</p>
+                <a class="text-link" href="{% url 'core:quote_request' %}?service={{ service.slug }}">Discuss this service <span>↗</span></a>
+            </div>
+        </article>
+        {% empty %}
+        <div class="empty-state">No services yet. Run <code>python manage.py seed_demo</code>.</div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section soft-section">
+    <div class="container inclusion-grid">
+        <div class="reveal">
+            <span class="eyebrow">STANDARD ON EVERY PROJECT</span>
+            <h2>The fundamentals are never optional.</h2>
+        </div>
+        <ul class="feature-list reveal">
+            <li><span>✓</span> Defined scope and commercial terms</li>
+            <li><span>✓</span> Project schedule and milestone tracking</li>
+            <li><span>✓</span> Site safety and housekeeping controls</li>
+            <li><span>✓</span> Quality inspections and photo records</li>
+            <li><span>✓</span> Progress updates and decision log</li>
+            <li><span>✓</span> Punch list, closeout, and turnover support</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+{% block content %}
+{% include "partials/page_hero.html" with eyebrow="CONTACT BUILDCORE" heading="Let's talk about the work." intro="Have a question before requesting a quotation? Send a message or reach us using the details below." %}
+
+<section class="section">
+    <div class="container contact-layout">
+        <div class="contact-details reveal">
+            <span class="eyebrow">DIRECT CONTACT</span>
+            <h2>Speak with a real project team.</h2>
+            <p>For quotation requests, use the project form so we receive the information our estimator needs. For everything else, contact us here.</p>
+            <ul>
+                <li><span>PHONE</span><a href="tel:+639175550142">{{ company.phone }}</a><small>Mon–Sat, 8:00 AM–6:00 PM</small></li>
+                <li><span>EMAIL</span><a href="mailto:{{ company.email }}">{{ company.email }}</a><small>Replies within one business day</small></li>
+                <li><span>OFFICE</span><strong>{{ company.address }}</strong><small>Visits by appointment</small></li>
+            </ul>
+            <a class="btn btn-outline" href="{% url 'core:quote_request' %}">Request a quotation <span>↗</span></a>
+        </div>
+        <div class="contact-form-card reveal">
+            <h2>Send a message</h2>
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="field-group">{{ field.label_tag }}{{ field }}{% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}{% for error in field.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>
+                {% endfor %}
+                <button class="btn btn-primary btn-block" type="submit">Send message <span>↗</span></button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
