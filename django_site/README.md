@@ -18,7 +18,9 @@ Isang kumpletong responsive construction-company website na may hiwalay na front
 - Contact-message inbox at newsletter subscriber list
 - Demo data command para may laman agad ang website
 - Automated tests para sa mahahalagang workflow
-- SQLite para madaling patakbuhin locally; puwedeng palitan ng PostgreSQL sa production
+- SQLite para madaling patakbuhin locally; puwedeng palitan ng PostgreSQL sa pamamagitan ng environment variables
+- Read-only REST API para sa services, projects, at testimonials
+- Swagger UI sa `/api/docs/` at OpenAPI schema sa `/api/schema/`
 
 ## Project structure
 
@@ -168,6 +170,24 @@ Sakop ng tests ang public pages, quotation creation, validation, email workflow,
 5. I-configure ang totoong SMTP email.
 6. Palitan ang sample phone, email, address, company claims, privacy copy, at photos.
 7. Patakbuhin ang `python manage.py collectstatic --noinput`.
+
+## Local PostgreSQL
+
+1. I-install ang PostgreSQL at tiyaking tumatakbo ang PostgreSQL service.
+2. Buksan ang `database/postgresql_setup.sql` sa pgAdmin Query Tool o psql bilang PostgreSQL administrator. Palitan muna ang sample password.
+3. Kopyahin ang `.env.example` bilang `.env`, pagkatapos alisin ang `#` sa PostgreSQL variables at ilagay ang parehong password.
+4. Sa activated virtual environment, patakbuhin:
+
+```powershell
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py seed_demo
+python manage.py runserver
+```
+
+Bisitahin ang `http://127.0.0.1:8000/api/docs/` para sa Swagger UI. Ang API endpoints ay nasa `/api/services/`, `/api/projects/`, at `/api/testimonials/`.
+
+Para ilipat ang kasalukuyang SQLite data, gamitin muna ang SQLite configuration at patakbuhin `python manage.py dumpdata --indent 2 > database/data.json`, pagkatapos lumipat sa PostgreSQL configuration at patakbuhin `python manage.py loaddata database/data.json`.
 
 Production server command:
 
