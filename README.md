@@ -44,7 +44,7 @@ Port `8080` is not exposed publicly. IIS accepts public HTTP/HTTPS traffic and f
 | Backend | Python 3.12, Django 6.0 |
 | API | Django REST Framework, drf-spectacular |
 | Frontend | Django templates, HTML, CSS, JavaScript |
-| Database | SQLite; optional PostgreSQL configuration included |
+| Database | Dedicated SQLite database (`db.sqlite3`) |
 | Static files | WhiteNoise |
 | Windows WSGI server | Waitress |
 | Reverse proxy | IIS 10, ARR 3, URL Rewrite 2 |
@@ -79,8 +79,7 @@ Port `8080` is not exposed publicly. IIS accepts public HTTP/HTTPS traffic and f
     ├── buildcore/
     ├── core/
     ├── templates/
-    ├── static/
-    └── database/
+    └── static/
 ```
 
 ## Local setup
@@ -127,7 +126,7 @@ The screenshot above confirms that the public subdomain is protected by a truste
 
 - Real `.env` files, passwords, database files, certificates, and private keys must never be committed.
 - `.gitignore` excludes `.env`, virtual environments, SQLite data, collected static files, and uploaded media.
-- The PostgreSQL SQL file contains a placeholder only; replace it securely outside version control before use.
+- BuildCore uses its own SQLite database and does not share a database connection with another website.
 - `DEBUG=False`, host allowlisting, trusted CSRF origins, secure cookies, HSTS, HTTPS, and a unique secret key are required in production.
 - Email SMTP setup is intentionally deferred until a dedicated construction-company mailbox is available.
 
