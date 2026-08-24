@@ -189,11 +189,21 @@ Bisitahin ang `http://127.0.0.1:8000/api/docs/` para sa Swagger UI. Ang API endp
 
 Para ilipat ang kasalukuyang SQLite data, gamitin muna ang SQLite configuration at patakbuhin `python manage.py dumpdata --indent 2 > database/data.json`, pagkatapos lumipat sa PostgreSQL configuration at patakbuhin `python manage.py loaddata database/data.json`.
 
-Production server command:
+Production server commands:
+
+Windows Server with Waitress:
+
+```powershell
+waitress-serve --listen=127.0.0.1:8080 buildcore.wsgi:application
+```
+
+Linux with Gunicorn:
 
 ```bash
 gunicorn buildcore.wsgi:application
 ```
+
+The actual Windows Server deployment—including IIS ARR, URL Rewrite, the scheduled startup task, DNS, and HTTPS—is documented in [`../docs/WINDOWS_SERVER_DEPLOYMENT.md`](../docs/WINDOWS_SERVER_DEPLOYMENT.md).
 
 ## Paalala
 

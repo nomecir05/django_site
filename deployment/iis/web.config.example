@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <system.webServer>
+    <rewrite>
+      <rules>
+        <rule name="Redirect HTTP to HTTPS" stopProcessing="true">
+          <match url="(.*)" />
+          <conditions>
+            <add input="{HTTPS}" pattern="off" />
+          </conditions>
+          <action
+            type="Redirect"
+            url="https://construction.crysmon.online/{R:1}"
+            appendQueryString="true"
+            redirectType="Permanent" />
+        </rule>
+
+        <rule name="BuildCore Django Reverse Proxy" stopProcessing="true">
+          <match url="(.*)" />
+          <action
+            type="Rewrite"
+            url="http://127.0.0.1:8080/{R:1}"
+            appendQueryString="true" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
+</configuration>
