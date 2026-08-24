@@ -4,4 +4,3 @@ waitress>=3,<4
 whitenoise>=6.8,<7
 djangorestframework>=3.16,<4
 drf-spectacular>=0.28,<1
-psycopg[binary]>=3.2,<4
