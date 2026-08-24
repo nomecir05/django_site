@@ -1,5 +1,6 @@
 Django>=5.2,<6.1
 gunicorn>=23,<24
+waitress>=3,<4
 whitenoise>=6.8,<7
 djangorestframework>=3.16,<4
 drf-spectacular>=0.28,<1
